@@ -4,10 +4,10 @@ from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeToolchain, cmake_layout
 
 
-class SynodicTemplateLibraryRecipe(ConanFile):
-    """Recipe for the Synodic Template Library"""
+class HonestyRecipe(ConanFile):
+    """Recipe for the Honesty"""
 
-    name = "synodic-template-library"
+    name = "honesty"
     version = "1.0"
 
     # Optional metadata
@@ -31,9 +31,6 @@ class SynodicTemplateLibraryRecipe(ConanFile):
         if self.settings.os == "Windows":
             del self.options.fPIC
 
-    def requirements(self):
-        self.requires("gtest/1.14.0")
-
     def layout(self):
         cmake_layout(self)
 
@@ -47,4 +44,4 @@ class SynodicTemplateLibraryRecipe(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.libs = ["synodic-template-library"]
+        self.cpp_info.libs = ["honesty"]

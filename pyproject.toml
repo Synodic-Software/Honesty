@@ -1,6 +1,6 @@
 [project]
-description = "Utility library."
-name = "synodic-template-library"
+description = "Profiling, testing, and benchmarking"
+name = "honesty"
 
 license = {text = "MIT"}
 
@@ -21,13 +21,6 @@ paths = ["LICENSE.md"]
 [project.urls]
 homepage = "https://github.com/Synodic-Software/Synodic-Template-Library"
 repository = "https://github.com/Synodic-Software/Synodic-Template-Library"
-
-[tool.cppython]
-
-[tool.cppython.provider.conan]
-dependencies = [
-  'gtest',
-]
 
 [tool.pdm.dev-dependencies]
 dev = [

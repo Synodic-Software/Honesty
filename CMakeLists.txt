@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
-project(synodic-template-library
+project(honesty
 	VERSION 0.1.0
-	DESCRIPTION "Synodic Template Library"
+	DESCRIPTION "Honesty"
 	LANGUAGES CXX
 )
 
@@ -10,10 +10,10 @@ project(synodic-template-library
 include(CTest)
 
 # Provide a namespaced alias
-add_library(synodic-template-library STATIC)
-add_library(synodic::synodic-template-library ALIAS synodic-template-library)
+add_library(honesty STATIC)
+add_library(synodic::honesty ALIAS honesty)
 
-set_target_properties(synodic-template-library
+set_target_properties(honesty
 	PROPERTIES
 		LINKER_LANGUAGE CXX
 		CXX_STANDARD 23
