@@ -1,6 +1,7 @@
 import std;
+import synodic.honesty;
 
-int main(int argc, char** argv)
+int main(const int argc, char* argv[])
 {
-	return 0;
+	return synodic::honesty::main(argc, argv);
 }
