@@ -4,5 +4,8 @@ target_sources(honesty
 		BASE_DIRS
 			"${PROJECT_SOURCE_DIR}/honesty"
 		FILES
+			"honesty.ixx"
 			"main.ixx"
+			"set.ixx"
+			"set.cpp"
 )

@@ -1,5 +1,5 @@
 
-export module synodic.honesty;
+export module synodic.honesty:main;
 
 import std;
 
