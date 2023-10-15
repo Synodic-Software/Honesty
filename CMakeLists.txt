@@ -22,7 +22,7 @@ set_target_properties(honesty
 )
 
 add_subdirectory(
-	"library"
+	"honesty"
 )
 
 if(BUILD_TESTING)

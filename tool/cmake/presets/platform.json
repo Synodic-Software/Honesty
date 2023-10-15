@@ -9,10 +9,6 @@
 			"binaryDir": "${sourceDir}/build/${presetName}",
 			"installDir": "${sourceDir}/install/${presetName}",
 			"cacheVariables": {
-				"CMAKE_PROJECT_TOP_LEVEL_INCLUDES": {
-					"type": "FILEPATH",
-					"value": "${sourceDir}/tool/conan/conan_provider.cmake"
-				},
 				"CMAKE_CONFIGURATION_TYPES": {
 					"type": "STRING",
 					"value": "Debug;Release"

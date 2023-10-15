@@ -5,8 +5,6 @@ project(tests
 	LANGUAGES CXX
 )
 
-find_package(GTest REQUIRED)
-
 add_executable(tests)
 
 set_target_properties(tests
@@ -20,12 +18,8 @@ set_target_properties(tests
 target_link_libraries(tests
 PRIVATE
 	${CMAKE_PROJECT_NAME}
-    GTest::gtest_main
 )
 
 add_subdirectory(
 	"unit"
 )
-
-include(GoogleTest)
-gtest_discover_tests(tests)

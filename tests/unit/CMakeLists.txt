@@ -1,15 +1,4 @@
-add_subdirectory(
-	container
-)
-
-add_subdirectory(
-	functional
-)
-
-add_subdirectory(
-	structure
-)
-
-add_subdirectory(
-	types
+target_sources(tests
+PRIVATE
+	test_main.cpp
 )
