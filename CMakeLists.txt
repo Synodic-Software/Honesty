@@ -6,8 +6,7 @@ project(honesty
 	LANGUAGES CXX
 )
 
-# Enable CTest for the project
-include(CTest)
+option(BUILD_TESTING "Build test programs" ON)
 
 # Provide a namespaced alias
 add_library(honesty STATIC)
@@ -26,6 +25,9 @@ add_subdirectory(
 )
 
 if(BUILD_TESTING)
+
+	# Do not include CTest because it adds targets and integrations we do not support
+	enable_testing()
 
     add_subdirectory(
 		"tests"

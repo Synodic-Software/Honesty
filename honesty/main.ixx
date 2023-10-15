@@ -3,18 +3,42 @@ export module synodic.honesty;
 
 import std;
 
+namespace synodic::honesty
+{
+	enum class Mode
+	{
+		EXECUTE
+	};
+}
+
 export namespace synodic::honesty
 {
 	int main(int argc, char* argv[])
 	{
+		// TODO: Parse inputs
+
+		constexpr Mode mode = Mode::EXECUTE;
+
 		try
 		{
-			// TODO: Parse configuration
+			switch (mode)
+			{
+				case Mode::EXECUTE :
+				{
+					break;
+				}
+				default :
+				{
+					std::terminate();
+				}
+			}
+
 			return 0;
 		}
 		catch (const std::invalid_argument& exception)
 		{
-			// TODO: Print error
+			std::println("Error: {0}", exception.what());
+
 			return 1;
 		}
 	}
