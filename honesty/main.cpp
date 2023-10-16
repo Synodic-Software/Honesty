@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
 		{
 			case synodic::honesty::Mode::EXECUTE:
 			{
+				synodic::honesty::entry();
 				break;
 			}
 			default:

@@ -35,7 +35,7 @@ add_subdirectory(
 
 if(BUILD_TESTING)
 
-	# Do not include CTest because it adds targets and integrations we do not support
+	# Do not include CTest because it adds targets and integrations we do not want to support
 	enable_testing()
 
     add_subdirectory(

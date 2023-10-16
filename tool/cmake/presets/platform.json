@@ -7,13 +7,7 @@
 			"description": "Base preset for configurations",
 			"generator": "Ninja Multi-Config",
 			"binaryDir": "${sourceDir}/build/${presetName}",
-			"installDir": "${sourceDir}/install/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CONFIGURATION_TYPES": {
-					"type": "STRING",
-					"value": "Debug;Release"
-				}
-			}
+			"installDir": "${sourceDir}/install/${presetName}"
 		},
 		{
 			"name": "windows-default",
