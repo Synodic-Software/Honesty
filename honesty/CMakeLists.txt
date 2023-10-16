@@ -5,7 +5,16 @@ target_sources(honesty
 			"${PROJECT_SOURCE_DIR}/honesty"
 		FILES
 			"honesty.ixx"
-			"main.ixx"
 			"set.ixx"
 			"set.cpp"
+			"entry.ixx"
+)
+
+target_sources(honesty_main
+	PUBLIC
+		FILE_SET CXX_MODULES
+		BASE_DIRS
+			"${PROJECT_SOURCE_DIR}/honesty"
+		FILES
+			"main.cpp"
 )

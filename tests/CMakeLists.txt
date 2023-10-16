@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
 project(tests
-	DESCRIPTION "Test project for Synodic Template Library"
+	DESCRIPTION ""
 	LANGUAGES CXX
 )
 
 add_executable(tests)
+add_executable(tests_no_main)
 
-set_target_properties(tests
+set_target_properties(tests tests_no_main
 	PROPERTIES
 		LINKER_LANGUAGE CXX
 		CXX_STANDARD 23
@@ -17,7 +18,12 @@ set_target_properties(tests
 
 target_link_libraries(tests
 PRIVATE
-	${CMAKE_PROJECT_NAME}
+	synodic::honesty::main
+)
+
+target_link_libraries(tests_no_main
+PRIVATE
+	synodic::honesty
 )
 
 add_subdirectory(
