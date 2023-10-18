@@ -74,5 +74,13 @@
 		}
 	],
 	"testPresets": [
+		{
+			"name": "windows-msbuild-msvc-test",
+			"displayName": "Test",
+			"configurePreset": "windows-msbuild-msvc",
+			"inherits": [
+				"windows-default"
+			]
+		}
 	]
 }

@@ -6,13 +6,13 @@ project(honesty
 	LANGUAGES CXX
 )
 
-option(BUILD_TESTING "Build test programs" ON)
+option(BUILD_TESTING "Build tests" ON)
 
 # Provide the library definition
 add_library(honesty STATIC)
 add_library(synodic::honesty ALIAS honesty)
 
-# Provide a convenience library for main
+# Provide a convenience variant with a main function
 add_library(honesty_main STATIC)
 add_library(synodic::honesty::main ALIAS honesty_main)
 
@@ -25,12 +25,12 @@ set_target_properties(honesty honesty_main
 )
 
 target_link_libraries(honesty_main
-PRIVATE
+PUBLIC
 	synodic::honesty
 )
 
 add_subdirectory(
-	"honesty"
+	honesty
 )
 
 if(BUILD_TESTING)
@@ -39,7 +39,15 @@ if(BUILD_TESTING)
 	enable_testing()
 
     add_subdirectory(
-		"tests"
+		tests
+	)
+
+	# If tests are added, make the 'tests' project the default startup
+	set_property(
+		DIRECTORY
+			${CMAKE_CURRENT_SOURCE_DIR}
+		PROPERTY
+			VS_STARTUP_PROJECT tests
 	)
 
 endif()
