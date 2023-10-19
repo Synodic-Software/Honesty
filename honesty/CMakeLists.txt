@@ -9,6 +9,7 @@ target_sources(honesty
 			"set.ixx"
 			"test.ixx"
 			"entry.ixx"
+			"runner.ixx"
 	PRIVATE
 		FILE_SET private_modules
 		TYPE CXX_MODULES
@@ -18,7 +19,7 @@ target_sources(honesty
 			"set.cpp"
 			"test.cpp"
 			"entry.cpp"
-
+			"runner.cpp"
 )
 
 target_sources(honesty_main
