@@ -1,18 +1,30 @@
 target_sources(honesty
 	PUBLIC
-		FILE_SET CXX_MODULES
+		FILE_SET public_modules
+		TYPE CXX_MODULES
 		BASE_DIRS
 			"${PROJECT_SOURCE_DIR}/honesty"
 		FILES
 			"honesty.ixx"
 			"set.ixx"
-			"set.cpp"
+			"test.ixx"
 			"entry.ixx"
+	PRIVATE
+		FILE_SET private_modules
+		TYPE CXX_MODULES
+		BASE_DIRS
+			"${PROJECT_SOURCE_DIR}/honesty"
+		FILES
+			"set.cpp"
+			"test.cpp"
+			"entry.cpp"
+
 )
 
 target_sources(honesty_main
 	PUBLIC
-		FILE_SET CXX_MODULES
+		FILE_SET public_main
+		TYPE CXX_MODULES
 		BASE_DIRS
 			"${PROJECT_SOURCE_DIR}/honesty"
 		FILES

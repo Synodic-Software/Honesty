@@ -17,5 +17,6 @@ auto set = honesty::Set(
 			"Statement",
 			[]
 			{
+				std::print("Test");
 			});
 	});
