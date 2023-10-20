@@ -27,5 +27,5 @@ PRIVATE
 )
 
 add_subdirectory(
-	"unit"
+	unit
 )
