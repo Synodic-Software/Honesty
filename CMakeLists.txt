@@ -22,6 +22,7 @@ set_target_properties(honesty honesty_main
 		CXX_STANDARD 23
 		CXX_STANDARD_REQUIRED ON
 		CXX_EXTENSIONS NO
+		FOLDER "honesty"
 )
 
 target_link_libraries(honesty_main
@@ -30,7 +31,7 @@ PUBLIC
 )
 
 add_subdirectory(
-	honesty
+	src
 )
 
 if(BUILD_TESTING)

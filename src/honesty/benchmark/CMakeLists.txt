@@ -3,12 +3,12 @@ target_sources(honesty
 		FILE_SET public_benchmark
 		TYPE CXX_MODULES
 		BASE_DIRS
-			"${PROJECT_SOURCE_DIR}/honesty"
+			"${PROJECT_SOURCE_DIR}/src"
 		FILES
 	PRIVATE
 		FILE_SET private_benchmark
 		TYPE CXX_MODULES
 		BASE_DIRS
-			"${PROJECT_SOURCE_DIR}/honesty"
+			"${PROJECT_SOURCE_DIR}/src"
 		FILES
 )

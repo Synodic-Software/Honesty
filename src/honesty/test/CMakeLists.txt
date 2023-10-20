@@ -3,9 +3,8 @@ target_sources(honesty
 		FILE_SET public_test
 		TYPE CXX_MODULES
 		BASE_DIRS
-			"${PROJECT_SOURCE_DIR}/honesty"
+			"${PROJECT_SOURCE_DIR}/src"
 		FILES
-			"honesty.ixx"
 			"set.ixx"
 			"test.ixx"
 			"entry.ixx"
@@ -14,7 +13,7 @@ target_sources(honesty
 		FILE_SET private_test
 		TYPE CXX_MODULES
 		BASE_DIRS
-			"${PROJECT_SOURCE_DIR}/honesty"
+			"${PROJECT_SOURCE_DIR}/src"
 		FILES
 			"set.cpp"
 			"test.cpp"
@@ -27,7 +26,7 @@ target_sources(honesty_main
 		FILE_SET test_main
 		TYPE CXX_MODULES
 		BASE_DIRS
-			"${PROJECT_SOURCE_DIR}/honesty"
+			"${PROJECT_SOURCE_DIR}/src"
 		FILES
 			"main.cpp"
 )

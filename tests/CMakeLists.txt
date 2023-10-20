@@ -14,6 +14,7 @@ set_target_properties(tests tests_no_main
 		CXX_STANDARD 23
 		CXX_STANDARD_REQUIRED ON
 		CXX_EXTENSIONS NO
+		FOLDER "tests"
 )
 
 target_link_libraries(tests
