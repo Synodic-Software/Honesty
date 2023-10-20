@@ -6,7 +6,7 @@ project(honesty
 	LANGUAGES CXX
 )
 
-option(BUILD_TESTING "Build tests" ON)
+option(BUILD_TESTING "Build the tests verifying Honesty functions" ON)
 
 # Provide the library definition
 add_library(honesty STATIC)
