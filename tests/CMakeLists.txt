@@ -6,15 +6,13 @@ project(tests
 )
 
 add_executable(tests)
-add_executable(tests_no_main)
 
-set_target_properties(tests tests_no_main
+set_target_properties(tests
 	PROPERTIES
 		LINKER_LANGUAGE CXX
 		CXX_STANDARD 23
 		CXX_STANDARD_REQUIRED ON
 		CXX_EXTENSIONS NO
-		FOLDER "tests"
 )
 
 target_link_libraries(tests
@@ -22,17 +20,12 @@ PRIVATE
 	synodic::honesty::main
 )
 
-target_link_libraries(tests_no_main
-PRIVATE
-	synodic::honesty
-)
-
 add_subdirectory(
 	unit
 )
 
 # Glob all files to add a source group tree
-file(GLOB_RECURSE file_list ${CMAKE_CURRENT_SOURCE_DIR})
+file(GLOB_RECURSE file_list ${CMAKE_CURRENT_SOURCE_DIR}/*)
 
 # Must be called from the target definition directory. Only matched against target source files (No nested CMakeList.txt, docs, etc).
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${file_list})

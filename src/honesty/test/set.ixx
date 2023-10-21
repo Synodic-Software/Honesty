@@ -12,28 +12,28 @@ export namespace synodic::honesty
 		return expression;
 	}
 
-	class Set
+	class TestSet
 	{
 	public:
-		constexpr Set(std::string_view name);
+		constexpr TestSet(std::string_view name);
 
 		template<std::invocable Fn>
-		constexpr Set(std::string_view name, Fn&& generator);
+		constexpr TestSet(std::string_view name, Fn&& generator);
 
 		template<std::invocable Fn>
-		const Set& operator=(Fn&& generator) const;
+		const TestSet& operator=(Fn&& generator) const;
 
 	private:
 		std::string_view name_;
 	};
 
-	constexpr Set::Set(std::string_view name) :
+	constexpr TestSet::TestSet(std::string_view name) :
 		name_(name)
 	{
 	}
 
 	template<std::invocable Fn>
-	constexpr Set::Set(std::string_view name, Fn&& generator) :
+	constexpr TestSet::TestSet(std::string_view name, Fn&& generator) :
 		name_(name)
 	{
 		// Propagate to the assignment operator
@@ -41,7 +41,7 @@ export namespace synodic::honesty
 	}
 
 	template<std::invocable Fn>
-	const Set& Set::operator=(Fn&& generator) const
+	const TestSet& TestSet::operator=(Fn&& generator) const
 	{
 		// Call the generator and register the tests
 		std::forward<Fn>(generator)();
@@ -57,7 +57,7 @@ export namespace synodic::honesty
 
 		[[nodiscard]] constexpr auto operator""_set(const char* const name, std::size_t const size)
 		{
-			return Set(std::string_view(name, size));
+			return TestSet(std::string_view(name, size));
 		}
 
 		[[nodiscard]] constexpr auto operator""_i(unsigned long long int num)

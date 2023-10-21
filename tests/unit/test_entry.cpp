@@ -1,5 +1,5 @@
 import std;
-import synodic.honesty;
+import synodic.honesty.test;
 
 int main(const int argc, char* argv[])
 {
