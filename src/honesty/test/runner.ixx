@@ -1,37 +1,24 @@
 
 export module synodic.honesty.test:runner;
 import std;
+import :set;
 
 export namespace synodic::honesty
 {
-	class BaseRunner
+
+	class Runner final
 	{
 	public:
-		virtual ~BaseRunner() = default;
-		virtual void Run()	  = 0;
-	};
-
-	template<std::invocable Fn>
-	class Runner final : public BaseRunner
-	{
-	public:
-		void Run() override;
-
-		explicit Runner(std::convertible_to<Fn> auto&& func);
+		void Run();
 
 	private:
-		Fn function_;
+		std::vector<TestSet> suites_;
 	};
 
-	template<std::invocable Fn>
-	void Runner<Fn>::Run()
+	void Runner::Run()
 	{
-		function_();
-	}
-
-	template<std::invocable Fn>
-	Runner<Fn>::Runner(std::convertible_to<Fn> auto&& func) :
-		function_(std::forward<decltype(func)>(func))
-	{
+		for (const TestSet& set: suites_)
+		{
+		}
 	}
 }

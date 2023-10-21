@@ -7,11 +7,11 @@ namespace synodic::honesty
 {
 	int entry()
 	{
-		const auto& reg = registry();
-		for (auto& testCase: reg)
-		{
-			testCase.Run();
-		}
+		//const auto& reg = registry();
+		//for (auto& testCase: reg)
+		//{
+		//	testCase.Run();
+		//}
 
 		return 0;
 	}

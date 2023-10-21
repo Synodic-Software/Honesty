@@ -8,11 +8,10 @@ target_sources(honesty
 			"runner.ixx"
 			"expression.ixx"
 			"literals.ixx"
+			"reporter.ixx"
 	PRIVATE
 		FILE_SET implementations
 		FILES
-			"set.cpp"
-			"test.cpp"
 			"entry.cpp"
 			"runner.cpp"
 )
@@ -26,4 +25,8 @@ target_sources(honesty_main
 
 add_subdirectory(
 	expression
+)
+
+add_subdirectory(
+	reporter
 )

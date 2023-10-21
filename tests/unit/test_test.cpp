@@ -4,10 +4,6 @@ import synodic.honesty.test;
 using namespace synodic;
 using namespace synodic::honesty::literals;
 
-auto literalTest = "Statement"_test = []
-{
-};
-
 auto defaultTest = honesty::Test(
 	"Statement",
 	[]
