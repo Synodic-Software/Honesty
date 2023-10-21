@@ -7,6 +7,7 @@ target_sources(honesty
 			"entry.ixx"
 			"runner.ixx"
 			"expression.ixx"
+			"literals.ixx"
 	PRIVATE
 		FILE_SET implementations
 		FILES

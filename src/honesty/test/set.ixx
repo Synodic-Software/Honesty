@@ -2,7 +2,6 @@
 export module synodic.honesty.test:set;
 
 import std;
-import :test;
 
 export namespace synodic::honesty
 {
@@ -46,23 +45,5 @@ export namespace synodic::honesty
 		// Call the generator and register the tests
 		std::forward<Fn>(generator)();
 		return *this;
-	}
-
-	namespace literals
-	{
-		[[nodiscard]] constexpr auto operator""_test(const char* const name, std::size_t const size)
-		{
-			return Test(std::string_view(name, size));
-		}
-
-		[[nodiscard]] constexpr auto operator""_set(const char* const name, std::size_t const size)
-		{
-			return TestSet(std::string_view(name, size));
-		}
-
-		[[nodiscard]] constexpr auto operator""_i(unsigned long long int num)
-		{
-			return num;
-		}
 	}
 }
