@@ -1,5 +1,5 @@
 
-export module synodic.honesty:set;
+export module synodic.honesty.test:set;
 
 import std;
 import :test;

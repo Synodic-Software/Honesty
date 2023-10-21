@@ -1,5 +1,5 @@
 export module synodic.honesty;
 
-export import :set;
-export import :entry;
-export import :test;
+export import synodic.honesty.benchmark;
+export import synodic.honesty.profile;
+export import synodic.honesty.test;

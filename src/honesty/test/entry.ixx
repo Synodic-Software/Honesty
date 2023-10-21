@@ -1,5 +1,5 @@
 
-export module synodic.honesty:entry;
+export module synodic.honesty.test:entry;
 
 export namespace synodic::honesty
 {

@@ -1,4 +1,4 @@
-module synodic.honesty:entry;
+module synodic.honesty.test:entry;
 
 import std;
 import :test;

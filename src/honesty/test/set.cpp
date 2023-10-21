@@ -1,4 +1,4 @@
-module synodic.honesty:set;
+module synodic.honesty.test:set;
 
 import std;
 

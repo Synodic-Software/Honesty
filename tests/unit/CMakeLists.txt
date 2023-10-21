@@ -11,5 +11,5 @@ PRIVATE
 	test_main.cpp
 )
 
-add_test(NAME tests COMMAND $<TARGET_FILE:tests> -E echo tests)
-add_test(NAME tests_no_main COMMAND $<TARGET_FILE:tests_no_main> -E echo tests_no_main)
+add_test(NAME tests COMMAND tests)
+add_test(NAME tests_no_main COMMAND tests_no_main)

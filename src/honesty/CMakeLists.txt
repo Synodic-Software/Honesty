@@ -1,9 +1,6 @@
 target_sources(honesty
 	PUBLIC
-		FILE_SET public_honesty
-		TYPE CXX_MODULES
-		BASE_DIRS
-			"${PROJECT_SOURCE_DIR}/src"
+		FILE_SET interfaces
 		FILES
 			"benchmark.ixx"
 			"profile.ixx"

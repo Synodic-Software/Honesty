@@ -6,7 +6,7 @@ project(honesty
 	LANGUAGES CXX
 )
 
-option(BUILD_TESTING "Build the tests verifying Honesty functions" ON)
+option(BUILD_TESTING "Build the tests verifying Honesty functionality" ON)
 
 # Provide the library definition
 add_library(honesty STATIC)
@@ -25,14 +25,22 @@ set_target_properties(honesty honesty_main
 		FOLDER "honesty"
 )
 
+# Link the library to the convenience variant
 target_link_libraries(honesty_main
 PUBLIC
 	synodic::honesty
 )
 
+# Gather all the project files
 add_subdirectory(
 	src
 )
+
+# Glob all files to add a source group tree. Includes all files
+file(GLOB_RECURSE file_list ${CMAKE_CURRENT_SOURCE_DIR}/src/*)
+
+# Must be called from the target definition directory. Only matched against target source files (No nested CMakeList.txt, docs, etc).
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src FILES ${file_list})
 
 if(BUILD_TESTING)
 
@@ -41,14 +49,6 @@ if(BUILD_TESTING)
 
     add_subdirectory(
 		tests
-	)
-
-	# If tests are added, make the 'tests' project the default startup
-	set_property(
-		DIRECTORY
-			${CMAKE_CURRENT_SOURCE_DIR}
-		PROPERTY
-			VS_STARTUP_PROJECT tests
 	)
 
 endif()

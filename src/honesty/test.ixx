@@ -1,4 +1,4 @@
-export module synodic.honesty;
+export module synodic.honesty.test;
 
 export import :set;
 export import :entry;

@@ -1,5 +1,5 @@
 
-export module synodic.honesty:runner;
+export module synodic.honesty.test:runner;
 import std;
 
 export namespace synodic::honesty
