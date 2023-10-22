@@ -1,14 +1,14 @@
 import std;
 import synodic.honesty.test;
 
-using namespace synodic;
+using namespace synodic::honesty;
 using namespace synodic::honesty::literals;
 
-honesty::Suite suite = honesty::Suite(
+Suite suite(
 	"suite",
-	[]
+	[]() -> generator<Test>
 	{
-		"test"_test = []
+		co_yield "test"_test = []
 		{
 		};
 	});

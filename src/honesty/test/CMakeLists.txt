@@ -10,11 +10,14 @@ target_sources(honesty
 			"literals.ixx"
 			"reporter.ixx"
 			"logger.ixx"
+			"generator.ixx"
+			"test.cpp"
 	PRIVATE
 		FILE_SET implementations
 		FILES
 			"runner.cpp"
 			"suite.cpp"
+
 )
 
 target_sources(honesty_main

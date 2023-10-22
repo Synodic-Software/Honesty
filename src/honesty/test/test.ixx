@@ -8,7 +8,8 @@ export namespace synodic::honesty
 	class Test
 	{
 	public:
-		consteval Test(std::string_view name);
+
+		Test(std::string_view name);
 
 		/**
 		 * \brief Creates a test from a
@@ -16,29 +17,29 @@ export namespace synodic::honesty
 		 * \param runner
 		 */
 		template<std::invocable Fn>
-		consteval Test(std::string_view name, Fn&& runner);
+		Test(std::string_view name, Fn&& runner);
 
 		template<std::ranges::range T, std::invocable<T&&> Fn>
-		consteval Test(std::string_view name, T&& data, Fn&& runner);
+		Test(std::string_view name, T&& data, Fn&& runner);
 
 		template<typename... ParamTypes, typename Fn>
 			requires(std::invocable<Fn, ParamTypes &&> && ...)
-		consteval Test(std::string_view name, std::tuple<ParamTypes...>&& data, Fn&& runner);
+		Test(std::string_view name, std::tuple<ParamTypes...>&& data, Fn&& runner);
 
-		template<std::invocable Fn>
-		consteval const Test& operator=(Fn&& runner) const;
+		Test& operator=(std::move_only_function<void()> runner);
 
-	private:
+	protected:
 		std::string_view name_;
+		std::move_only_function<void()> test_;
 	};
 
-	consteval Test::Test(std::string_view name) :
+	Test::Test(std::string_view name) :
 		name_(name)
 	{
 	}
 
 	template<std::invocable Fn>
-	consteval Test::Test(std::string_view name, Fn&& runner) :
+	Test::Test(std::string_view name, Fn&& runner) :
 		name_(name)
 	{
 		// Propagate to the assignment operator
@@ -46,19 +47,13 @@ export namespace synodic::honesty
 	}
 
 	template<std::ranges::range T, std::invocable<T&&> Fn>
-	consteval Test::Test(std::string_view name, T&& data, Fn&& runner)
+	Test::Test(std::string_view name, T&& data, Fn&& runner)
 	{
 	}
 
 	template<typename... ParamTypes, typename Fn>
 		requires(std::invocable<Fn, ParamTypes &&> && ...)
-	consteval Test::Test(std::string_view name, std::tuple<ParamTypes...>&& data, Fn&& runner)
+	Test::Test(std::string_view name, std::tuple<ParamTypes...>&& data, Fn&& runner)
 	{
-	}
-
-	template<std::invocable Fn>
-	consteval const Test& Test::operator=(Fn&& runner) const
-	{
-		return *this;
 	}
 }

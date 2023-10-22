@@ -1,10 +1,10 @@
 import std;
 import synodic.honesty.test;
 
-using namespace synodic;
+using namespace synodic::honesty;
 using namespace synodic::honesty::literals;
 
-auto defaultTest = honesty::Test(
+auto defaultTest = Test(
 	"default",
 	[]
 	{
@@ -14,16 +14,16 @@ auto callable = []
 {
 };
 
-auto referenceTest = honesty::Test("reference", callable);
+auto referenceTest = Test("reference", callable);
 
-auto parameterizedTestTuple = honesty::Test(
+auto parameterizedTestTuple = Test(
 	"tuple",
 	std::tuple(3u, 4.0f),
 	[](const auto& parameter)
 	{
 	});
 
-auto parameterizedTestRange = honesty::Test(
+auto parameterizedTestRange = Test(
 	"array",
 	std::array{3, 4},
 	[](const auto& parameter)

@@ -2,31 +2,35 @@
 export module synodic.honesty.test:runner;
 import std;
 import :suite;
+import :test;
 
 export namespace synodic::honesty
 {
-	class Runner final
+	class Runner
 	{
 	public:
-		void Run() const;
+
+		class Suite final : public honesty::Suite
+		{
+		public:
+			explicit Suite(honesty::Suite&& other) noexcept;
+
+			generator<Test> Generate() const;
+		private:
+		};
+
+		class Test final : public honesty::Test
+		{
+		public:
+			explicit Test(honesty::Test&& other) noexcept;
+
+			void Run();
+		};
+
+		void Run();
 
 		static std::vector<Suite>& Suites();
 
 	private:
 	};
-
-	void Runner::Run() const
-	{
-		const auto& suites = Suites();
-		for (const Suite& suite: suites)
-		{
-		}
-	}
-
-	std::vector<Suite>& Runner::Suites()
-	{
-		static std::vector<Suite> suites;
-
-		return suites;
-	}
 }

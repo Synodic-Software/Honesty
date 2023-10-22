@@ -2,25 +2,14 @@ module synodic.honesty.test:suite;
 
 import std;
 import :suite;
+import :runner;
 
 namespace synodic::honesty
 {
-	Suite::Suite(std::string_view name) :
-		name_(name)
+	Suite::Suite(std::string_view name, std::move_only_function<generator<Test>() const> generator) :
+		name_(std::move(name)),
+		generator_(std::move(generator))
 	{
-	}
-
-	Suite::Suite(std::string_view name, std::move_only_function<void()> generator) :
-		name_(name)
-	{
-		// Propagate to the assignment operator
-		*this = std::move(generator);
-	}
-
-	const Suite& Suite::operator=(std::move_only_function<void()> generator) const
-	{
-		// Call the generator and register the tests
-		// std::generator<Test> generator();
-		return *this;
+		Runner::Suites().emplace_back(std::move(*this));
 	}
 }
