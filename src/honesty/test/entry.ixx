@@ -1,7 +1,24 @@
 
 export module synodic.honesty.test:entry;
 
+import std;
+
+import synodic.honesty.test.logger;
+import synodic.honesty.test.reporter;
+
 export namespace synodic::honesty
 {
-	int entry();
+	enum class TestResultCode
+	{
+		FAIL
+	};
+
+	template<is_logger Logger = logger::StandardOut, is_reporter Reporter = reporter::StandardOut>
+	std::expected<void, TestResultCode> entry(Logger& logger, Reporter& reporter)
+	{
+
+		return std::unexpected(TestResultCode::FAIL);
+
+		return {};
+	}
 }

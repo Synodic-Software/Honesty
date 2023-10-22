@@ -5,20 +5,28 @@ import :set;
 
 export namespace synodic::honesty
 {
-
 	class Runner final
 	{
 	public:
-		void Run();
+		void Run() const;
+
+		static std::vector<TestSet>& Suites();
 
 	private:
-		std::vector<TestSet> suites_;
 	};
 
-	void Runner::Run()
+	void Runner::Run() const
 	{
-		for (const TestSet& set: suites_)
+		const auto& suites = Suites();
+		for (const TestSet& set: suites)
 		{
 		}
+	}
+
+	std::vector<TestSet>& Runner::Suites()
+	{
+		static std::vector<TestSet> suites;
+
+		return suites;
 	}
 }

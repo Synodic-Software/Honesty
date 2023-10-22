@@ -1,4 +1,4 @@
-import synodic.honesty;
+import synodic.honesty.test;
 
 import std;
 
@@ -23,7 +23,9 @@ int main(int argc, char* argv[])
 		{
 			case synodic::honesty::Mode::EXECUTE:
 			{
-				synodic::honesty::entry();
+				synodic::honesty::logger::StandardOut logger;
+				synodic::honesty::reporter::StandardOut reporter;
+				auto result = synodic::honesty::entry(logger, reporter);
 				break;
 			}
 			default:

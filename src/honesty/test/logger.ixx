@@ -1,9 +1,9 @@
-export module synodic.honesty.test.reporter;
+export module synodic.honesty.test.logger;
 
 export import :stdout;
 
 export namespace synodic::honesty
 {
 	template<typename T>
-	concept is_reporter = true;
+	concept is_logger = true;
 }

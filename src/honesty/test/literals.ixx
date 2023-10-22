@@ -10,7 +10,7 @@ export namespace synodic::honesty::literals
 		return Test(std::string_view(name, size));
 	}
 
-	[[nodiscard]] consteval auto operator""_set(const char* const name, std::size_t const size)
+	[[nodiscard]] auto operator""_set(const char* const name, std::size_t const size)
 	{
 		return TestSet(std::string_view(name, size));
 	}

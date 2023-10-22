@@ -4,8 +4,11 @@ import synodic.honesty.test;
 using namespace synodic;
 using namespace synodic::honesty::literals;
 
-auto set = honesty::TestSet(
-	"test",
+honesty::TestSet set = honesty::TestSet(
+	"set",
 	[]
 	{
+		"test"_test = []
+		{
+		};
 	});
