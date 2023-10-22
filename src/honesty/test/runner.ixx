@@ -1,7 +1,7 @@
 
 export module synodic.honesty.test:runner;
 import std;
-import :set;
+import :suite;
 
 export namespace synodic::honesty
 {
@@ -10,7 +10,7 @@ export namespace synodic::honesty
 	public:
 		void Run() const;
 
-		static std::vector<TestSet>& Suites();
+		static std::vector<Suite>& Suites();
 
 	private:
 	};
@@ -18,14 +18,14 @@ export namespace synodic::honesty
 	void Runner::Run() const
 	{
 		const auto& suites = Suites();
-		for (const TestSet& set: suites)
+		for (const Suite& suite: suites)
 		{
 		}
 	}
 
-	std::vector<TestSet>& Runner::Suites()
+	std::vector<Suite>& Runner::Suites()
 	{
-		static std::vector<TestSet> suites;
+		static std::vector<Suite> suites;
 
 		return suites;
 	}

@@ -2,7 +2,7 @@ target_sources(honesty
 	PUBLIC
 		FILE_SET interfaces
 		FILES
-			"set.ixx"
+			"suite.ixx"
 			"test.ixx"
 			"entry.ixx"
 			"runner.ixx"
@@ -14,7 +14,7 @@ target_sources(honesty
 		FILE_SET implementations
 		FILES
 			"runner.cpp"
-			"set.cpp"
+			"suite.cpp"
 )
 
 target_sources(honesty_main
