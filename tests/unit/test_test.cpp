@@ -18,14 +18,14 @@ auto callable = []
 
 auto referenceTest = Test("reference", callable);
 
-auto parameterizedTestTuple = Test(
+auto parameterizedTestTuple = ParameterizedTest(
 	"tuple",
 	std::tuple(3u, 4.0f),
 	[](const auto& parameter)
 	{
 	});
 
-auto parameterizedTestRange = Test(
+auto parameterizedTestRange = ParameterizedTest(
 	"array",
 	std::array{3, 4},
 	[](const auto& parameter)

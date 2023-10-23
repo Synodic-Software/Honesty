@@ -11,7 +11,7 @@ target_sources(honesty
 			"reporter.ixx"
 			"logger.ixx"
 			"generator.ixx"
-			"test.cpp"
+			"test.cppyp"
 	PRIVATE
 		FILE_SET implementations
 		FILES

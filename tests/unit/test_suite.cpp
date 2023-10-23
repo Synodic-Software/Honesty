@@ -11,4 +11,11 @@ Suite suite(
 		co_yield "test"_test = []
 		{
 		};
+
+		co_yield ParameterizedTest(
+			"array",
+			std::array{3, 4},
+			[](const auto& parameter)
+			{
+			});
 	});

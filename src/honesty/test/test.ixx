@@ -2,6 +2,7 @@
 export module synodic.honesty.test:test;
 
 import std;
+import generator;
 
 export namespace synodic::honesty
 {
@@ -15,13 +16,6 @@ export namespace synodic::honesty
 		 */
 		Test(std::string_view name, std::move_only_function<void()> runner);
 
-		template<std::ranges::range T, std::invocable<T&&> Fn>
-		Test(std::string_view name, T&& data, Fn&& runner);
-
-		template<typename... ParamTypes, typename Fn>
-			requires(std::invocable<Fn, ParamTypes &&> && ...)
-		Test(std::string_view name, std::tuple<ParamTypes...>&& data, Fn&& runner);
-
 		Test& operator=(std::move_only_function<void()> runner);
 
 	protected:
@@ -29,14 +23,43 @@ export namespace synodic::honesty
 		std::move_only_function<void()> test_;
 	};
 
+	template<typename... ParamTypes>
+	class ParameterizedTest
+	{
+	public:
+		template<std::ranges::range T, std::invocable<T&&> Fn>
+		ParameterizedTest(std::string_view name, T&& data, Fn&& runner);
+
+		template<typename Fn>
+			requires(std::invocable<Fn, ParamTypes &&> && ...)
+		ParameterizedTest(std::string_view name, std::tuple<ParamTypes...>&& data, Fn&& runner);
+
+		const generator<Test> operator=(const ParameterizedTest& test) const;
+
+	private:
+		std::tuple<ParamTypes...> parameters;
+	};
+
+
+	template<typename... ParamTypes>
 	template<std::ranges::range T, std::invocable<T&&> Fn>
-	Test::Test(std::string_view name, T&& data, Fn&& runner)
+	ParameterizedTest<ParamTypes...>::ParameterizedTest(std::string_view name, T&& data, Fn&& runner)
 	{
 	}
 
-	template<typename... ParamTypes, typename Fn>
+	template<typename... ParamTypes>
+	template<typename Fn>
 		requires(std::invocable<Fn, ParamTypes &&> && ...)
-	Test::Test(std::string_view name, std::tuple<ParamTypes...>&& data, Fn&& runner)
+	ParameterizedTest<ParamTypes...>::ParameterizedTest(
+		std::string_view name,
+		std::tuple<ParamTypes...>&& data,
+		Fn&& runner)
 	{
+	}
+
+	template<typename ... ParamTypes>
+	const generator<Test> ParameterizedTest<ParamTypes...>::operator=(const ParameterizedTest& test) const
+	{
+		return test;
 	}
 }
