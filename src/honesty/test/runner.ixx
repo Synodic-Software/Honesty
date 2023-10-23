@@ -9,14 +9,12 @@ export namespace synodic::honesty
 	class Runner
 	{
 	public:
-
 		class Suite final : public honesty::Suite
 		{
 		public:
 			explicit Suite(honesty::Suite&& other) noexcept;
 
 			generator<Test> Generate() const;
-		private:
 		};
 
 		class Test final : public honesty::Test
@@ -30,7 +28,5 @@ export namespace synodic::honesty
 		void Run();
 
 		static std::vector<Suite>& Suites();
-
-	private:
 	};
 }

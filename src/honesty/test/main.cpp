@@ -10,7 +10,6 @@ namespace synodic::honesty
 	};
 }
 
-
 int main(int argc, char* argv[])
 {
 	// TODO: Parse inputs

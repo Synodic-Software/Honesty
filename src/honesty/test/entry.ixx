@@ -22,7 +22,7 @@ export namespace synodic::honesty
 
 		runner.Run();
 
-		return std::unexpected(TestResultCode::FAIL);
+		//return std::unexpected(TestResultCode::FAIL);
 
 		return {};
 	}

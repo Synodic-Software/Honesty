@@ -1,3 +1,5 @@
+// These tests are not executed, so they exist to test the compilation of tests
+
 import std;
 import synodic.honesty.test;
 
@@ -29,3 +31,10 @@ auto parameterizedTestRange = Test(
 	[](const auto& parameter)
 	{
 	});
+
+auto literalTest = []
+{
+	"literal"_test = []
+	{
+	};
+};

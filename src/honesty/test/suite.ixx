@@ -12,7 +12,7 @@ export namespace synodic::honesty
 	public:
 		Suite(std::string_view name, std::move_only_function<generator<Test>() const> generator);
 
-		Suite(const Suite& other) = delete;
+		Suite(const Suite& other)	  = delete;
 		Suite(Suite&& other) noexcept = default;
 
 		Suite& operator=(const Suite& other)	 = delete;

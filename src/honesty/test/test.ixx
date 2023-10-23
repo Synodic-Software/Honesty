@@ -8,16 +8,12 @@ export namespace synodic::honesty
 	class Test
 	{
 	public:
-
-		Test(std::string_view name);
-
 		/**
 		 * \brief Creates a test from a
 		 * \param name
 		 * \param runner
 		 */
-		template<std::invocable Fn>
-		Test(std::string_view name, Fn&& runner);
+		Test(std::string_view name, std::move_only_function<void()> runner);
 
 		template<std::ranges::range T, std::invocable<T&&> Fn>
 		Test(std::string_view name, T&& data, Fn&& runner);
@@ -32,19 +28,6 @@ export namespace synodic::honesty
 		std::string_view name_;
 		std::move_only_function<void()> test_;
 	};
-
-	Test::Test(std::string_view name) :
-		name_(name)
-	{
-	}
-
-	template<std::invocable Fn>
-	Test::Test(std::string_view name, Fn&& runner) :
-		name_(name)
-	{
-		// Propagate to the assignment operator
-		*this = std::forward<Fn>(runner);
-	}
 
 	template<std::ranges::range T, std::invocable<T&&> Fn>
 	Test::Test(std::string_view name, T&& data, Fn&& runner)
