@@ -21,7 +21,7 @@ namespace synodic::honesty
 
 	void Runner::Test::Run()
 	{
-		test_();
+		runner_();
 	}
 
 	void Runner::Run()

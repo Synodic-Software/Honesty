@@ -6,14 +6,13 @@ import std;
 export namespace synodic::honesty
 {
 
-	template<typename YieldedType, typename ValueType = std::remove_cvref_t<YieldedType>>
+	template<typename T>
 	class [[nodiscard]] generator
 	{
 		class promise
 		{
 		public:
-			using value_type = ValueType;
-			using reference	 = std::add_lvalue_reference_t<YieldedType>;
+			using reference	 = std::add_lvalue_reference_t<T>;
 			using pointer	 = std::add_pointer_t<reference>;
 
 			auto get_return_object() noexcept
@@ -77,18 +76,17 @@ export namespace synodic::honesty
 		public:
 			using iterator_category = std::input_iterator_tag;
 			using difference_type	= std::ptrdiff_t;
-			using value_type		= promise::value_type;
-			using reference			= promise::reference;
+			using reference			= typename promise::reference;
 
 			iterator() noexcept		  = default;
 			iterator(const iterator&) = delete;
 
-			iterator(iterator&& o)
+			iterator(iterator&& o) noexcept
 			{
 				std::swap(m_coroutine, o.m_coroutine);
 			}
 
-			iterator& operator=(iterator&& o)
+			iterator& operator=(iterator&& o) noexcept
 			{
 				std::swap(m_coroutine, o.m_coroutine);
 				return *this;
@@ -141,8 +139,6 @@ export namespace synodic::honesty
 	public:
 		using promise_type = promise;
 
-		generator() = default;
-
 		generator(generator&& other) noexcept :
 			m_coroutine(exchange(other.m_coroutine, nullptr))
 		{
@@ -191,5 +187,5 @@ export namespace synodic::honesty
 
 }
 
-export template<typename T, typename U>
-inline constexpr bool std::ranges::enable_view<synodic::honesty::generator<T, U>> = true;
+export template<typename T>
+inline constexpr bool std::ranges::enable_view<synodic::honesty::generator<T>> = true;

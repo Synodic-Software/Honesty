@@ -9,18 +9,13 @@ export namespace synodic::honesty
 	class Test
 	{
 	public:
-		/**
-		 * \brief Creates a test from a
-		 * \param name
-		 * \param runner
-		 */
 		Test(std::string_view name, std::move_only_function<void()> runner);
 
 		Test& operator=(std::move_only_function<void()> runner);
 
 	protected:
 		std::string_view name_;
-		std::move_only_function<void()> test_;
+		std::move_only_function<void()> runner_;
 	};
 
 	template<typename... ParamTypes>
@@ -34,12 +29,11 @@ export namespace synodic::honesty
 			requires(std::invocable<Fn, ParamTypes &&> && ...)
 		ParameterizedTest(std::string_view name, std::tuple<ParamTypes...>&& data, Fn&& runner);
 
-		const generator<Test> operator=(const ParameterizedTest& test) const;
+		explicit operator generator<Test>() const;
 
 	private:
 		std::tuple<ParamTypes...> parameters;
 	};
-
 
 	template<typename... ParamTypes>
 	template<std::ranges::range T, std::invocable<T&&> Fn>
@@ -57,9 +51,14 @@ export namespace synodic::honesty
 	{
 	}
 
-	template<typename ... ParamTypes>
-	const generator<Test> ParameterizedTest<ParamTypes...>::operator=(const ParameterizedTest& test) const
+	template<typename... ParamTypes>
+	ParameterizedTest<ParamTypes...>::operator generator<Test>() const
 	{
-		return test;
+		co_yield Test(
+			"",
+			[]()
+			{
+			});
 	}
+
 }

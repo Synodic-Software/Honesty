@@ -32,9 +32,23 @@ auto parameterizedTestRange = ParameterizedTest(
 	{
 	});
 
-auto literalTest = []
+auto parameterizedTypeTest = ParameterizedTest(
+	"type",
+	std::tuple(3u, 4.0f),
+	[]<typename T>(T input)
+	{
+	});
+
+auto helperScope = []
 {
 	"literal"_test = []
 	{
 	};
+
+	for (auto i: std::vector{1, 2, 3})
+	{
+		"parameterized"_test = [i]
+		{
+		};
+	}
 };
