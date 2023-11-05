@@ -1,5 +1,5 @@
 export module synodic.honesty.test:suite;
-export import generator;
+import :generator;
 
 import std;
 
@@ -10,7 +10,7 @@ export namespace synodic::honesty
 	class Suite
 	{
 	public:
-		Suite(std::string_view name, std::move_only_function<generator<Test>() const> generator);
+		Suite(std::string_view name, std::move_only_function<TestGenerator() const> generator);
 
 		Suite(const Suite& other)	  = delete;
 		Suite(Suite&& other) noexcept = default;
@@ -20,6 +20,6 @@ export namespace synodic::honesty
 
 	protected:
 		std::string_view name_;
-		std::move_only_function<generator<Test>() const> generator_;
+		std::move_only_function<TestGenerator() const> generator_;
 	};
 }

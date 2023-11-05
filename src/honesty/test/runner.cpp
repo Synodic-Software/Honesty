@@ -9,19 +9,9 @@ namespace synodic::honesty
 	{
 	}
 
-	generator<Test> Runner::Suite::Generate() const
+	TestGenerator Runner::Suite::Generate() const
 	{
 		return generator_();
-	}
-
-	Runner::Test::Test(honesty::Test&& other) noexcept :
-		honesty::Test(std::move(other))
-	{
-	}
-
-	void Runner::Test::Run()
-	{
-		runner_();
 	}
 
 	void Runner::Run()
@@ -32,9 +22,7 @@ namespace synodic::honesty
 			auto generator = suite.Generate();
 			for (auto& test: generator)
 			{
-				Test testWrapper(std::move(test));
-
-				testWrapper.Run();
+				test.Run();
 			}
 		}
 	}

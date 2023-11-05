@@ -1,31 +1,31 @@
 
-export module generator;
+export module synodic.honesty.test:generator;
 
 import std;
+import :implementation;
 
 export namespace synodic::honesty
 {
 
-	template<typename T>
-	class [[nodiscard]] generator
+	class [[nodiscard]] TestGenerator
 	{
 		class promise
 		{
 		public:
-			using reference	 = std::add_lvalue_reference_t<T>;
+			using reference	 = std::add_lvalue_reference_t<BaseTest>;
 			using pointer	 = std::add_pointer_t<reference>;
 
 			auto get_return_object() noexcept
 			{
-				return generator {std::coroutine_handle<promise_type>::from_promise(*this)};
+				return TestGenerator {std::coroutine_handle<promise_type>::from_promise(*this)};
 			}
 
-			std::suspend_always initial_suspend() const noexcept
+			static std::suspend_always initial_suspend() noexcept
 			{
 				return {};
 			}
 
-			std::suspend_always final_suspend() const noexcept
+			static std::suspend_always final_suspend() noexcept
 			{
 				return {};
 			}
@@ -47,22 +47,22 @@ export namespace synodic::honesty
 				return *m_value;
 			}
 
-			// Don't allow any use of 'co_await' inside the generator coroutine.
+			// Don't allow any use of 'co_await' inside the TestGenerator coroutine.
 			template<typename U>
 			std::suspend_never await_transform(U&& value) = delete;
 
-			void return_void() noexcept
+			static void return_void() noexcept
 			{
 			}
 
-			void unhandled_exception()
+			static void unhandled_exception()
 			{
 				throw;
 			}
 
 		private:
 			pointer m_value;
-			friend generator;
+			friend TestGenerator;
 		};
 
 		struct sentinel
@@ -76,7 +76,7 @@ export namespace synodic::honesty
 		public:
 			using iterator_category = std::input_iterator_tag;
 			using difference_type	= std::ptrdiff_t;
-			using reference			= typename promise::reference;
+			using reference			= promise::reference;
 
 			iterator() noexcept		  = default;
 			iterator(const iterator&) = delete;
@@ -126,12 +126,6 @@ export namespace synodic::honesty
 				return m_coroutine.promise().value();
 			}
 
-			auto operator->() const noexcept
-				requires std::is_reference_v<reference>
-			{
-				return m_coroutine.promise().value();
-			}
-
 		private:
 			coroutine_handle m_coroutine = nullptr;
 		};
@@ -139,14 +133,14 @@ export namespace synodic::honesty
 	public:
 		using promise_type = promise;
 
-		generator(generator&& other) noexcept :
+		TestGenerator(TestGenerator&& other) noexcept :
 			m_coroutine(exchange(other.m_coroutine, nullptr))
 		{
 		}
 
-		generator(const generator& other) = delete;
+		TestGenerator(const TestGenerator& other) = delete;
 
-		~generator()
+		~TestGenerator()
 		{
 			if (m_coroutine)
 			{
@@ -154,7 +148,7 @@ export namespace synodic::honesty
 			}
 		}
 
-		generator& operator=(generator&& other) noexcept
+		TestGenerator& operator=(TestGenerator&& other) noexcept
 		{
 			swap(other);
 			return *this;
@@ -166,18 +160,18 @@ export namespace synodic::honesty
 			return iterator {std::exchange(m_coroutine, nullptr)};
 		}
 
-		auto end() const noexcept
+		static auto end() noexcept
 		{
 			return sentinel {};
 		}
 
-		void swap(generator& other) noexcept
+		void swap(TestGenerator& other) noexcept
 		{
 			std::swap(m_coroutine, other.m_coroutine);
 		}
 
 	private:
-		explicit generator(std::coroutine_handle<promise> coroutine) noexcept :
+		explicit TestGenerator(std::coroutine_handle<promise> coroutine) noexcept :
 			m_coroutine(coroutine)
 		{
 		}
@@ -188,4 +182,4 @@ export namespace synodic::honesty
 }
 
 export template<typename T>
-inline constexpr bool std::ranges::enable_view<synodic::honesty::generator<T>> = true;
+inline constexpr bool std::ranges::enable_view<synodic::honesty::TestGenerator<T>> = true;

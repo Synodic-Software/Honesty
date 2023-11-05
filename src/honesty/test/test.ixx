@@ -2,11 +2,16 @@
 export module synodic.honesty.test:test;
 
 import std;
-import generator;
+import :generator;
+import :implementation;
 
 export namespace synodic::honesty
 {
-	class Test
+	template<typename T>
+	class Test;
+
+	template<>
+	class Test<> : public BaseTest
 	{
 	public:
 		Test(std::string_view name, std::move_only_function<void()> runner);
@@ -14,51 +19,78 @@ export namespace synodic::honesty
 		Test& operator=(std::move_only_function<void()> runner);
 
 	protected:
-		std::string_view name_;
+		void Run() override;
+
+	private:
 		std::move_only_function<void()> runner_;
 	};
 
-	template<typename... ParamTypes>
-	class ParameterizedTest
+	template<typename T>
+	class Test<T> final : public BaseTest
 	{
 	public:
-		template<std::ranges::range T, std::invocable<T&&> Fn>
-		ParameterizedTest(std::string_view name, T&& data, Fn&& runner);
+		Test(std::string_view name, std::move_only_function<void(const T&)> runner);
 
-		template<typename Fn>
-			requires(std::invocable<Fn, ParamTypes &&> && ...)
-		ParameterizedTest(std::string_view name, std::tuple<ParamTypes...>&& data, Fn&& runner);
+		Test& operator=(std::move_only_function<void(const T&)> runner);
 
-		explicit operator generator<Test>() const;
+	protected:
+		void Run() override;
 
-	private:
-		std::tuple<ParamTypes...> parameters;
+		std::move_only_function<void(const T&)> runner_;
 	};
 
-	template<typename... ParamTypes>
-	template<std::ranges::range T, std::invocable<T&&> Fn>
-	ParameterizedTest<ParamTypes...>::ParameterizedTest(std::string_view name, T&& data, Fn&& runner)
+	template<typename T>
+	Test<T>::Test(std::string_view name, std::move_only_function<void(const T&)> runner) :
+		BaseTest(name),
+		runner_(std::move(runner))
 	{
 	}
 
-	template<typename... ParamTypes>
-	template<typename Fn>
-		requires(std::invocable<Fn, ParamTypes &&> && ...)
-	ParameterizedTest<ParamTypes...>::ParameterizedTest(
-		std::string_view name,
-		std::tuple<ParamTypes...>&& data,
-		Fn&& runner)
+	template<typename T>
+	Test<T>& Test<T>::operator=(std::move_only_function<void(const T&)> runner)
+	{
+		runner_ = std::move(runner);
+		return *this;
+	}
+
+	template<typename T>
+	void Test<T>::Run()
 	{
 	}
 
-	template<typename... ParamTypes>
-	ParameterizedTest<ParamTypes...>::operator generator<Test>() const
+	// Template Deductions
+
+	Test(std::string_view, std::move_only_function<void()>) -> Test<>;
+
+	template<typename T>
+	Test(std::string_view, std::move_only_function<void(const T&)>) -> Test<T>;
+
+	// Operators
+
+	template<typename T>
+	[[nodiscard]] constexpr auto operator|(const Test<T>& test, const auto std::ranges::range& range)
 	{
-		co_yield Test(
-			"",
-			[]()
+		return [&test, &range]
+		{
+			for (const auto& arg: range)
 			{
-			});
+				//co_yield ;
+			}
+		};
+	}
+
+	template<typename T, typename... Types>
+	[[nodiscard]] constexpr auto operator|(const Test<T>& test, std::tuple<Types...>&& tuple)
+	{
+		return [&test, &tuple](const auto name)
+		{
+			apply(
+				[test, name](const auto&... args)
+				{
+					//(co_yield , ...);
+				},
+				test);
+		};
 	}
 
 }

@@ -18,27 +18,6 @@ auto callable = []
 
 auto referenceTest = Test("reference", callable);
 
-auto parameterizedTestTuple = ParameterizedTest(
-	"tuple",
-	std::tuple(3u, 4.0f),
-	[](const auto& parameter)
-	{
-	});
-
-auto parameterizedTestRange = ParameterizedTest(
-	"array",
-	std::array{3, 4},
-	[](const auto& parameter)
-	{
-	});
-
-auto parameterizedTypeTest = ParameterizedTest(
-	"type",
-	std::tuple(3u, 4.0f),
-	[]<typename T>(T input)
-	{
-	});
-
 auto helperScope = []
 {
 	"literal"_test = []

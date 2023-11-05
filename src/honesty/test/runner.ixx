@@ -14,15 +14,7 @@ export namespace synodic::honesty
 		public:
 			explicit Suite(honesty::Suite&& other) noexcept;
 
-			generator<Test> Generate() const;
-		};
-
-		class Test final : public honesty::Test
-		{
-		public:
-			explicit Test(honesty::Test&& other) noexcept;
-
-			void Run();
+			TestGenerator Generate() const;
 		};
 
 		void Run();

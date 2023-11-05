@@ -7,7 +7,7 @@ import :runner;
 
 namespace synodic::honesty
 {
-	Suite::Suite(std::string_view name, std::move_only_function<generator<Test>() const> generator) :
+	Suite::Suite(std::string_view name, std::move_only_function<TestGenerator() const> generator) :
 		name_(std::move(name)),
 		generator_(std::move(generator))
 	{
