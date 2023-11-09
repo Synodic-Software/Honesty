@@ -180,6 +180,3 @@ export namespace synodic::honesty
 	};
 
 }
-
-export template<typename T>
-inline constexpr bool std::ranges::enable_view<synodic::honesty::TestGenerator<T>> = true;

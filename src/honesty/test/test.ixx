@@ -8,10 +8,21 @@ import :implementation;
 export namespace synodic::honesty
 {
 	template<typename T>
-	class Test;
+	class Test final : public BaseTest
+	{
+	public:
+		Test(std::string_view name, std::move_only_function<void(const T&)> runner);
+
+		Test& operator=(std::move_only_function<void(const T&)> runner);
+
+	protected:
+		void Run() override;
+
+		std::move_only_function<void(const T&)> runner_;
+	};
 
 	template<>
-	class Test<> : public BaseTest
+	class Test<void> final : public BaseTest
 	{
 	public:
 		Test(std::string_view name, std::move_only_function<void()> runner);
@@ -23,20 +34,6 @@ export namespace synodic::honesty
 
 	private:
 		std::move_only_function<void()> runner_;
-	};
-
-	template<typename T>
-	class Test<T> final : public BaseTest
-	{
-	public:
-		Test(std::string_view name, std::move_only_function<void(const T&)> runner);
-
-		Test& operator=(std::move_only_function<void(const T&)> runner);
-
-	protected:
-		void Run() override;
-
-		std::move_only_function<void(const T&)> runner_;
 	};
 
 	template<typename T>
@@ -60,7 +57,7 @@ export namespace synodic::honesty
 
 	// Template Deductions
 
-	Test(std::string_view, std::move_only_function<void()>) -> Test<>;
+	Test(std::string_view, std::move_only_function<void()>) -> Test<void>;
 
 	template<typename T>
 	Test(std::string_view, std::move_only_function<void(const T&)>) -> Test<T>;
@@ -68,7 +65,7 @@ export namespace synodic::honesty
 	// Operators
 
 	template<typename T>
-	[[nodiscard]] constexpr auto operator|(const Test<T>& test, const auto std::ranges::range& range)
+	[[nodiscard]] constexpr auto operator|(const Test<T>& test, const std::ranges::range auto& range)
 	{
 		return [&test, &range]
 		{
