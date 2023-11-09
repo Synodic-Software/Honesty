@@ -42,6 +42,12 @@ export namespace synodic::honesty
 				return {};
 			}
 
+			std::suspend_always yield_value(TestGenerator& value) noexcept
+			{
+				//m_value = std::addressof(value);
+				return {};
+			}
+
 			reference value() const noexcept
 			{
 				return *m_value;

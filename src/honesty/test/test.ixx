@@ -64,27 +64,27 @@ export namespace synodic::honesty
 
 	// Operators
 
-	template<typename T>
-	[[nodiscard]] constexpr auto operator|(const Test<T>& test, const std::ranges::range auto& range)
+	template<std::invocable Fn>
+	[[nodiscard]] constexpr TestGenerator operator|(const Fn&& test, const std::ranges::range auto& range)
 	{
 		return [&test, &range]
 		{
 			for (const auto& arg: range)
 			{
-				//co_yield ;
+				co_yield Test("",test);
 			}
 		};
 	}
 
-	template<typename T, typename... Types>
-	[[nodiscard]] constexpr auto operator|(const Test<T>& test, std::tuple<Types...>&& tuple)
+	template<std::invocable Fn, typename... Types>
+	[[nodiscard]] constexpr TestGenerator operator|(const Fn&& test, std::tuple<Types...>&& tuple)
 	{
 		return [&test, &tuple](const auto name)
 		{
 			apply(
 				[test, name](const auto&... args)
 				{
-					//(co_yield , ...);
+					(co_yield Test("",test), ...);
 				},
 				test);
 		};
