@@ -27,7 +27,7 @@ export namespace synodic::honesty
 	public:
 		Test(std::string_view name, std::move_only_function<void()> runner);
 
-		Test& operator=(std::move_only_function<void()> runner);
+		Test& operator=(std::move_only_function<void()> generator);
 
 	protected:
 		void Run() override;
@@ -64,30 +64,20 @@ export namespace synodic::honesty
 
 	// Operators
 
-	template<std::invocable Fn>
+	template<std::invocable<int> Fn>
 	[[nodiscard]] constexpr TestGenerator operator|(const Fn&& test, const std::ranges::range auto& range)
 	{
-		return [&test, &range]
+		for (const auto& value: range)
 		{
-			for (const auto& arg: range)
-			{
-				co_yield Test("",test);
-			}
-		};
+			co_yield Test("", test);
+		}
 	}
 
-	template<std::invocable Fn, typename... Types>
+	template<typename Fn, typename... Types>
+		requires(std::invocable<Fn, Types> && ...)
 	[[nodiscard]] constexpr TestGenerator operator|(const Fn&& test, std::tuple<Types...>&& tuple)
 	{
-		return [&test, &tuple](const auto name)
-		{
-			apply(
-				[test, name](const auto&... args)
-				{
-					(co_yield Test("",test), ...);
-				},
-				test);
-		};
+		co_yield Test("", test);
 	}
 
 }
