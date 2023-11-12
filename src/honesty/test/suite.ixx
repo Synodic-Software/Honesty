@@ -5,8 +5,17 @@ import std;
 
 import :test;
 
+namespace synodic::honesty
+{
+	class SuiteStub
+	{
+	};
+
+}
+
 export namespace synodic::honesty
 {
+
 	class Suite
 	{
 	public:

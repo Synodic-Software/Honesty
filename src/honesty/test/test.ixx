@@ -5,8 +5,18 @@ import std;
 import :generator;
 import :implementation;
 
+namespace synodic::honesty
+{
+
+	class TestStub
+	{
+	};
+
+}
+
 export namespace synodic::honesty
 {
+
 	template<typename T>
 	class Test final : public BaseTest
 	{

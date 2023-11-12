@@ -15,4 +15,11 @@ export namespace synodic::honesty::literals
 
 		co_yield Test(std::string_view(name, size), callable);
 	}
+
+
+	[[nodiscard]] Suite operator""_suite(const char* const name, std::size_t const size)
+	{
+		//Suite(std::string_view(name, size));
+		return Suite(std::string_view(name, size));
+	}
 }
