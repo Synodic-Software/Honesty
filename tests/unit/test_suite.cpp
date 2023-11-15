@@ -6,7 +6,7 @@ using namespace synodic::honesty::literals;
 
 "outer-suite"_suite = []() -> TestGenerator
 {
-	co_yield "inner-suite"_suite = []() -> TestGenerator
+	"inner-suite"_suite = []() -> TestGenerator
 	{
 		int count = 0;
 		co_yield Test(
