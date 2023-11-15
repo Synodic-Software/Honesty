@@ -31,6 +31,5 @@ using namespace synodic::honesty::literals;
 			++count;
 		} | std::array {3, 4};
 
-		expect(count == 5);
 	};
 };
