@@ -13,4 +13,10 @@ namespace synodic::honesty
 	{
 		Runner::Suites().emplace_back(std::move(*this));
 	}
+
+	Suite& Suite::operator=(std::move_only_function<TestGenerator() const> generator) noexcept
+	{
+		generator_ = std::move(generator);
+		return *this;
+	}
 }

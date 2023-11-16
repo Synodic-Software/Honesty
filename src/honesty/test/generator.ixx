@@ -12,12 +12,12 @@ export namespace synodic::honesty
 		class promise
 		{
 		public:
-			using reference	 = std::add_lvalue_reference_t<BaseTest>;
-			using pointer	 = std::add_pointer_t<reference>;
+			using reference = std::add_lvalue_reference_t<BaseTest>;
+			using pointer	= std::add_pointer_t<reference>;
 
 			auto get_return_object() noexcept
 			{
-				return TestGenerator {std::coroutine_handle<promise_type>::from_promise(*this)};
+				return TestGenerator(std::coroutine_handle<promise_type>::from_promise(*this));
 			}
 
 			static std::suspend_always initial_suspend() noexcept
@@ -44,7 +44,7 @@ export namespace synodic::honesty
 
 			std::suspend_always yield_value(TestGenerator& value) noexcept
 			{
-				//m_value = std::addressof(value);
+				// m_value = std::addressof(value);
 				return {};
 			}
 

@@ -5,18 +5,15 @@ import std;
 
 import :test;
 
-namespace synodic::honesty
-{
-	class SuiteStub
-	{
-	};
-
-}
-
 export namespace synodic::honesty
 {
 
+	class SuiteSettings
+	{
+	};
+
 	class Suite
+
 	{
 	public:
 		Suite(std::string_view name, std::move_only_function<TestGenerator() const> generator);
@@ -25,7 +22,9 @@ export namespace synodic::honesty
 		Suite(Suite&& other) noexcept = default;
 
 		Suite& operator=(const Suite& other)	 = delete;
-		Suite& operator=(Suite&& other) noexcept = delete;
+		Suite& operator=(Suite&& other) noexcept = default;
+
+		Suite& operator=(std::move_only_function<TestGenerator() const> generator) noexcept;
 
 	protected:
 		std::string_view name_;
