@@ -16,7 +16,12 @@ export namespace synodic::honesty::literals
 		co_yield Test(std::string_view(name, size), callable);
 	}
 
-
+	/**
+	 * @brief Literal that generates an empty suite that must be assigned a closure for test generation
+	 * @param name The name of the suite
+	 * @param size The size of the name of the suite
+	 * @return A suite object
+	 */
 	[[nodiscard]] Suite operator""_suite(const char* const name, std::size_t const size)
 	{
 		//Suite(std::string_view(name, size));
