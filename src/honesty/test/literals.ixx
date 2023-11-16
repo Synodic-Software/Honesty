@@ -24,7 +24,7 @@ export namespace synodic::honesty::literals
 	 */
 	[[nodiscard]] Suite operator""_suite(const char* const name, std::size_t const size)
 	{
-		//Suite(std::string_view(name, size));
+		// Suite(std::string_view(name, size));
 		return Suite(std::string_view(name, size));
 	}
 }
