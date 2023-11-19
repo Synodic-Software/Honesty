@@ -1,0 +1,4 @@
+= Honesty Documentation
+:navtitle: Honesty Documentation
+
+== Honesty
