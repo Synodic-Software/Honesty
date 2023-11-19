@@ -1,11 +1,9 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
 project(tests
-	DESCRIPTION "Test project for Synodic Template Library"
+	DESCRIPTION "Tests for the honesty project"
 	LANGUAGES CXX
 )
-
-find_package(GTest REQUIRED)
 
 add_executable(tests)
 
@@ -19,13 +17,23 @@ set_target_properties(tests
 
 target_link_libraries(tests
 PRIVATE
-	${CMAKE_PROJECT_NAME}
-    GTest::gtest_main
+	synodic::honesty::main
 )
 
 add_subdirectory(
-	"unit"
+	unit
 )
 
-include(GoogleTest)
-gtest_discover_tests(tests)
+# Glob all files to add a source group tree
+file(GLOB_RECURSE file_list ${CMAKE_CURRENT_SOURCE_DIR}/*)
+
+# Must be called from the target definition directory. Only matched against target source files (No nested CMakeList.txt, docs, etc).
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${file_list})
+
+# Make the 'tests' project the default startup
+set_property(
+	DIRECTORY
+		${CMAKE_CURRENT_SOURCE_DIR}
+	PROPERTY
+		VS_STARTUP_PROJECT tests
+)

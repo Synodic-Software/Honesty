@@ -1,0 +1,1 @@
+module synodic.honesty.test.reporter:stdout;

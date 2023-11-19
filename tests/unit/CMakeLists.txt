@@ -1,15 +1,10 @@
-add_subdirectory(
-	container
+target_sources(tests
+PRIVATE
+	test_expect.cpp
+	test_generator.cpp
+	test_suite.cpp
+	test_test.cpp
+	test_entry.cpp
 )
 
-add_subdirectory(
-	functional
-)
-
-add_subdirectory(
-	structure
-)
-
-add_subdirectory(
-	types
-)
+add_test(NAME tests COMMAND tests)
