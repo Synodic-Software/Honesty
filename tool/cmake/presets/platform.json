@@ -6,7 +6,18 @@
 			"hidden": true,
 			"description": "Base preset for configurations",
 			"generator": "Ninja Multi-Config",
-			"binaryDir": "${sourceDir}/build/${presetName}"
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"installDir": "${sourceDir}/install/${presetName}",
+			"cacheVariables": {
+				"CMAKE_PROJECT_TOP_LEVEL_INCLUDES": {
+					"type": "FILEPATH",
+					"value": "${sourceDir}/tool/conan/conan_provider.cmake"
+				},
+				"CMAKE_CONFIGURATION_TYPES": {
+					"type": "STRING",
+					"value": "Debug;Release"
+				}
+			}
 		},
 		{
 			"name": "windows-default",
@@ -83,8 +94,13 @@
 	],
 	"testPresets": [
 		{
-			"name": "default",
+			"name": "windows-default",
 			"hidden": true,
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Windows"
+			},
 			"output": {
 				"outputOnFailure": true,
 				"shortProgress": true
@@ -95,27 +111,21 @@
 			}
 		},
 		{
-			"name": "windows-default",
-			"hidden": true,
-			"condition": {
-				"type": "equals",
-				"lhs": "${hostSystemName}",
-				"rhs": "Windows"
-			},
-			"inherits": [
-				"default"
-			]
-		},
-		{
 			"name": "macos-default",
 			"hidden": true,
 			"output": {
 				"outputOnFailure": true,
 				"shortProgress": true
 			},
-			"inherits": [
-				"default"
-			]
+			"execution": {
+				"noTestsAction": "error",
+				"stopOnFailure": true
+			},
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Darwin"
+			}
 		},
 		{
 			"name": "linux-default",
@@ -124,9 +134,15 @@
 				"outputOnFailure": true,
 				"shortProgress": true
 			},
-			"inherits": [
-				"default"
-			]
+			"execution": {
+				"noTestsAction": "error",
+				"stopOnFailure": true
+			},
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Linux"
+			}
 		}
 	]
 }
